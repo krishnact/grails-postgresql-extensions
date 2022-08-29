@@ -2,6 +2,7 @@ package net.kaleidos.hibernate.usertype
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.google.gson.ToNumberPolicy
 import groovy.transform.CompileStatic
 import org.apache.commons.lang.ObjectUtils
 import org.hibernate.HibernateException
@@ -21,7 +22,7 @@ class JsonMapType implements UserType {
     static int SQLTYPE = 90021
 
     private final Type userType = Map
-    private final Gson gson = new GsonBuilder().serializeNulls().create()
+    private final Gson gson = new GsonBuilder().serializeNulls().setObjectToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create()
 
     @Override
     int[] sqlTypes() {
